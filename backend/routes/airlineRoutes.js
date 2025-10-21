@@ -10,5 +10,4 @@ router.post("/", protect, adminOnly, addAirline);
 // Everyone can view airlines
 router.get("/", getAirlines);
 
-
 export default router;

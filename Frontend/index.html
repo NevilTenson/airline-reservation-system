@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Reservation System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ---------- LOGIN SECTION ---------- -->
+  <section id="login-section">
+    <h2>Login</h2>
+    <input id="email" type="email" placeholder="Enter your email">
+    <input id="password" type="password" placeholder="Enter your password">
+    <button onclick="login()">Login</button>
+  </section>
+
+  <!-- ---------- DASHBOARD ---------- -->
+  <section id="dashboard-section" style="display:none;">
+
+    <!-- USER DASHBOARD -->
+    <div id="user-dashboard" style="display:none;">
+
+      <!-- BOOK TICKET -->
+      <div id="book-ticket-section">
+        <h2>Book Ticket</h2>
+
+        <select id="flightId" onchange="fillSourceDestination()">
+          <option value="">Select Flight</option>
+        </select>
+
+        <select id="classId">
+          <option value="economy">Economy</option>
+          <option value="business">Business</option>
+        </select>
+
+        <input type="text" id="source" placeholder="Source" readonly>
+        <input type="text" id="destination" placeholder="Destination" readonly>
+        <input type="text" id="passengerName" placeholder="Passenger Name">
+        <input type="text" id="seatNumber" placeholder="Seat Number">
+
+        <button id="bookTicketBtn">Book Ticket</button>
+        <p id="bookingResult"></p>
+      </div>
+
+      <!-- VIEW TICKETS -->
+      <div id="view-tickets-section">
+        <h2>Your Tickets</h2>
+        <ul id="ticketList"></ul>
+      </div>
+
+      <!-- CANCEL TICKET -->
+      <div id="cancel-ticket-section">
+        <h2>Cancel Ticket</h2>
+        <input id="cancelTicketId" placeholder="Enter Ticket ID">
+        <button onclick="cancelTicket()">Cancel Ticket</button>
+      </div>
+
+      <!-- MAKE PAYMENT -->
+      <div id="make-payment-section">
+        <h2>Make Payment</h2>
+        <input id="payTicketId" placeholder="Enter Ticket ID">
+        <input id="payAmount" placeholder="Enter Amount">
+        <select id="payMode">
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+          <option value="UPI">UPI</option>
+        </select>
+        <button onclick="makePayment()">Pay</button>
+      </div>
+
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-dashboard" style="display:none;">
+
+      <!-- ADD AIRLINE -->
+      <div id="add-airline-section">
+        <h2>Add Airline</h2>
+        <input id="airlineName" placeholder="Airline Name">
+        <input id="airlineContact" placeholder="Contact Number">
+        <button onclick="addAirline()">Add Airline</button>
+
+        <h3>Select Airline for Flights</h3>
+        <select id="airlineSelect">
+          <option value="">Select Airline</option>
+        </select>
+      </div>
+
+      <!-- ADD FLIGHT -->
+      <div id="add-flight-section">
+        <h2>Add Flight</h2>
+        <input id="flightNumber" placeholder="Flight Number">
+        <input id="flightName" placeholder="Flight Name">
+        <input id="sourceInput" placeholder="Source">
+        <input id="destinationInput" placeholder="Destination">
+        <input id="departureTime" placeholder="Departure Time">
+        <input id="arrivalTime" placeholder="Arrival Time">
+        <input id="seatAvailability" placeholder="Available Seats">
+        <input id="distance" placeholder="Distance (km)">
+        <button onclick="addFlight()">Add Flight</button>
+      </div>
+
+      <!-- VIEW ALL TICKETS -->
+      <div id="all-tickets-section">
+        <h2>All Tickets</h2>
+        <ul id="allTicketsList"></ul>
+      </div>
+
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

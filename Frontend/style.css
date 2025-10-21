@@ -1,0 +1,165 @@
+/* ---------- GLOBAL ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f0f4f8;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ---------- CONTAINERS ---------- */
+section {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* ---------- HEADINGS ---------- */
+h2 {
+  margin-bottom: 15px;
+  color: #1e3a8a;
+}
+
+h3 {
+  margin: 15px 0 10px;
+  color: #2563eb;
+}
+
+/* ---------- INPUTS & SELECTS ---------- */
+input, select {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37,99,235,0.5);
+  outline: none;
+}
+
+/* ---------- BUTTONS ---------- */
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #1e40af;
+  transform: scale(1.03);
+}
+
+/* ---------- LOGIN SECTION ---------- */
+#login-section {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+#login-section input {
+  width: 90%;
+  margin: 10px auto;
+}
+
+/* ---------- DASHBOARD ---------- */
+#user-dashboard, #admin-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+#book-ticket-section, #view-tickets-section, #cancel-ticket-section, #make-payment-section,
+#add-airline-section, #add-flight-section, #all-tickets-section {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* ---------- LISTS ---------- */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-size: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* ---------- USER TICKETS ---------- */
+.user-ticket {
+  border-left: 5px solid #3b82f6;
+  background: #dbeafe;
+}
+
+/* ---------- ADMIN TICKETS ---------- */
+.admin-ticket {
+  border-left: 5px solid #10b981;
+  background: #d1fae5;
+}
+
+/* ---------- RESULTS ---------- */
+#bookingResult, #paymentResult {
+  padding: 10px;
+  margin-top: 10px;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  section {
+    padding: 15px;
+  }
+
+  input, select, button {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  #dashboard-section {
+    gap: 15px;
+  }
+}

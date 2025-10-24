@@ -1,12 +1,11 @@
-import express from 'express';
-import { makePayment, getTicketPayments } from '../controllers/PaymentController.js';
+import express from "express";
+import { createPayment, getPayments, getPaymentByTicket } from "../controllers/paymentController.js";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// Make payment for a ticket
-router.post('/pay', makePayment);
-
-// Get payments for a ticket
-router.get('/ticket/:ticketId', getTicketPayments);
+router.post("/", protect, createPayment);
+router.get("/", protect, getPayments);
+router.get("/:ticket_id", protect, getPaymentByTicket);
 
 export default router;

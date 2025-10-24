@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Search Results</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-login" class="hidden"><a href="login.html">Login</a></li>
+      <li id="nav-register" class="hidden"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <header><h1>Search Results</h1></header>
+    <section id="results-container" class="results-grid">
+      <!-- results inserted here -->
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/search.js"></script>
+</body>
+</html>

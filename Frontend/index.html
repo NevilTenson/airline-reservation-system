@@ -1,117 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airline Reservation System</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Airline — Home</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    /* simple, clean home styles */
+    .hero {
+      display:flex;
+      gap:24px;
+      align-items:center;
+      justify-content:space-between;
+      padding:40px;
+      background:linear-gradient(180deg,#ffffff, #f7fbff);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .hero-left{max-width:68%}
+    .hero h1{font-size:28px;margin:0 0 8px}
+    .hero p.lead{color:var(--muted);margin:0 0 16px}
+    .cta{display:flex;gap:10px}
+    .hero-right img{max-width:320px;border-radius:10px}
+    .simple-section{margin-top:18px}
+    .quote{font-style:italic;color:var(--primary);margin-top:12px}
+    @media (max-width:820px){
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero-right img{max-width:100%}
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="index.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-admin" class="hidden"><a href="admin.html">Admin</a></li> <!-- added -->
+      <li id="nav-login"><a href="login.html">Login</a></li>
+      <li id="nav-register"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
 
-  <!-- ---------- LOGIN SECTION ---------- -->
-  <section id="login-section">
-    <h2>Login</h2>
-    <input id="email" type="email" placeholder="Enter your email">
-    <input id="password" type="password" placeholder="Enter your password">
-    <button onclick="login()">Login</button>
-  </section>
+  <main class="container">
+    <section class="hero card" aria-labelledby="home-title">
+      <div class="hero-left">
+        <h1 id="home-title">Welcome to My Airline</h1>
+        <p class="lead">Book flights simply and quickly. Secure accounts, search by route & date, and complete a simulated checkout — ideal for demos and testing.</p>
 
-  <!-- ---------- DASHBOARD ---------- -->
-  <section id="dashboard-section" style="display:none;">
+        <div class="cta">
+          <a class="btn primary" href="search.html">Search Flights</a>
+          <a class="btn link" href="bookings.html">My Bookings</a>
+        </div>
 
-    <!-- USER DASHBOARD -->
-    <div id="user-dashboard" style="display:none;">
-
-      <!-- BOOK TICKET -->
-      <div id="book-ticket-section">
-        <h2>Book Ticket</h2>
-
-        <select id="flightId" onchange="fillSourceDestination()">
-          <option value="">Select Flight</option>
-        </select>
-
-        <select id="classId">
-          <option value="economy">Economy</option>
-          <option value="business">Business</option>
-        </select>
-
-        <input type="text" id="source" placeholder="Source" readonly>
-        <input type="text" id="destination" placeholder="Destination" readonly>
-        <input type="text" id="passengerName" placeholder="Passenger Name">
-        <input type="text" id="seatNumber" placeholder="Seat Number">
-
-        <button id="bookTicketBtn">Book Ticket</button>
-        <p id="bookingResult"></p>
+        <p class="quote">“Good company in a journey makes the way seem shorter.” — Travel with confidence.</p>
       </div>
 
-      <!-- VIEW TICKETS -->
-      <div id="view-tickets-section">
-        <h2>Your Tickets</h2>
-        <ul id="ticketList"></ul>
+      <div class="hero-right" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1511910849309-900f6b7b7f8b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="airplane flying over clouds" />
       </div>
+    </section>
 
-      <!-- CANCEL TICKET -->
-      <div id="cancel-ticket-section">
-        <h2>Cancel Ticket</h2>
-        <input id="cancelTicketId" placeholder="Enter Ticket ID">
-        <button onclick="cancelTicket()">Cancel Ticket</button>
+    <section class="simple-section">
+      <div class="card">
+        <h2>About this demo</h2>
+        <p class="muted">This is a minimal frontend for an Airline Reservation System. Use Register to create an account, Login to authenticate, then Search → Book → Checkout to try the full flow. Payments are simulated.</p>
       </div>
+    </section>
+  </main>
 
-      <!-- MAKE PAYMENT -->
-      <div id="make-payment-section">
-        <h2>Make Payment</h2>
-        <input id="payTicketId" placeholder="Enter Ticket ID">
-        <input id="payAmount" placeholder="Enter Amount">
-        <select id="payMode">
-          <option value="Credit Card">Credit Card</option>
-          <option value="Debit Card">Debit Card</option>
-          <option value="UPI">UPI</option>
-        </select>
-        <button onclick="makePayment()">Pay</button>
-      </div>
-
-    </div>
-
-    <!-- ADMIN DASHBOARD -->
-    <div id="admin-dashboard" style="display:none;">
-
-      <!-- ADD AIRLINE -->
-      <div id="add-airline-section">
-        <h2>Add Airline</h2>
-        <input id="airlineName" placeholder="Airline Name">
-        <input id="airlineContact" placeholder="Contact Number">
-        <button onclick="addAirline()">Add Airline</button>
-
-        <h3>Select Airline for Flights</h3>
-        <select id="airlineSelect">
-          <option value="">Select Airline</option>
-        </select>
-      </div>
-
-      <!-- ADD FLIGHT -->
-      <div id="add-flight-section">
-        <h2>Add Flight</h2>
-        <input id="flightNumber" placeholder="Flight Number">
-        <input id="flightName" placeholder="Flight Name">
-        <input id="sourceInput" placeholder="Source">
-        <input id="destinationInput" placeholder="Destination">
-        <input id="departureTime" placeholder="Departure Time">
-        <input id="arrivalTime" placeholder="Arrival Time">
-        <input id="seatAvailability" placeholder="Available Seats">
-        <input id="distance" placeholder="Distance (km)">
-        <button onclick="addFlight()">Add Flight</button>
-      </div>
-
-      <!-- VIEW ALL TICKETS -->
-      <div id="all-tickets-section">
-        <h2>All Tickets</h2>
-        <ul id="allTicketsList"></ul>
-      </div>
-
-    </div>
-
-  </section>
-
-  <script src="script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

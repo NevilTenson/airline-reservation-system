@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Search Flights</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-login" class="hidden"><a href="login.html">Login</a></li>
+      <li id="nav-register" class="hidden"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <header><h1>Find Flights</h1></header>
+
+    <section class="card">
+      <form id="search-form" class="form-grid" autocomplete="off">
+        <label>
+          Origin
+          <input id="origin" name="origin" required />
+        </label>
+
+        <label>
+          Destination
+          <input id="destination" name="destination" required />
+        </label>
+
+        <label>
+          Departure Date
+          <input id="departureDate" name="departureDate" type="date" required />
+        </label>
+
+        <label>
+          Passengers
+          <input id="passengerCount" name="passengerCount" type="number" min="1" value="1" required />
+        </label>
+
+        <label>
+          Class
+          <select id="class-select" name="classId" required>
+            <option value="">Loading classes...</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit" id="search-btn" class="btn primary">Search Flights</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/search.js"></script>
+</body>
+</html>

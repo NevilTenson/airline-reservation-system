@@ -1,15 +1,24 @@
-import mongoose from 'mongoose';
+// models/Flight.js
 
-const flightSchema = new mongoose.Schema({
-  flightNumber: { type: String, required: true, unique: true },
-  flightName: { type: String, required: true },
-  source: { type: String, required: true },
-  destination: { type: String, required: true },
-  arrivalTime: { type: String },
-  departureTime: { type: String },
-  seatAvailability: { type: Number, default: 0 },
-  distance: { type: Number },
-  airlineId: { type: mongoose.Schema.Types.ObjectId, ref: 'Airline', required: true }
-}, { timestamps: true });
+import { DataTypes } from "sequelize";
+import sequelize from "../config/db.js";
+import Airline from "./Airline.js";
+import Airport from "./Airport.js"; // <-- Import the new model
 
-export default mongoose.model('Flight', flightSchema);
+const Flight = sequelize.define("Flight", {
+  flightNumber: { type: DataTypes.STRING, allowNull: false, unique: true },
+
+  // REMOVED: origin (String)
+  // REMOVED: destination (String)
+
+  departureTime: { type: DataTypes.DATE, allowNull: false },
+  arrivalTime: { type: DataTypes.DATE, allowNull: false },
+  price: { type: DataTypes.FLOAT, allowNull: false },
+  
+  // ADDED: Foreign Keys
+  // We don't need to explicitly add them here; 
+  // Sequelize adds them via the associations below.
+});
+
+
+export default Flight;

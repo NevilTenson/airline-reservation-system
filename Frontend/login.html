@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-login" class="hidden"><a href="login.html">Login</a></li>
+      <li id="nav-register" class="hidden"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="card small">
+      <h2>Login</h2>
+      <form id="login-form" class="form-stack" autocomplete="off">
+        <label>
+          Email
+          <input id="email" name="email" type="email" required />
+        </label>
+        <label>
+          Password
+          <input id="password" name="password" type="password" required />
+        </label>
+        <div class="actions">
+          <button type="submit" class="btn primary">Login</button>
+          <a class="btn link" href="register.html">Register</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

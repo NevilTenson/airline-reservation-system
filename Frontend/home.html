@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Airline — Home</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    /* small home-page specific styles */
+    .hero{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      padding:28px;
+      background:linear-gradient(180deg, #ffffff, #f7fbff);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .hero-left{max-width:64%}
+    .hero h1{font-size:28px;margin-bottom:10px}
+    .hero p.lead{color:var(--muted);margin-bottom:18px}
+    .cta-group{display:flex;gap:10px}
+    .quote{font-style:italic;color:var(--primary);margin:18px 0 0 0}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+    .feature{background:#fff;border-radius:10px;padding:12px;border:1px solid #eef3f8}
+    @media (max-width:820px){
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero-left{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="home.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-login"><a href="login.html">Login</a></li>
+      <li id="nav-register"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="hero card">
+      <div class="hero-left">
+        <h1>Welcome to My Airline</h1>
+        <p class="lead">Fast, simple, and reliable flight booking. Search flights, choose seats, and complete payments — all in one place.</p>
+
+        <div class="cta-group">
+          <a class="btn primary" href="index.html">Search Flights</a>
+          <a class="btn link" href="bookings.html">My Bookings</a>
+        </div>
+
+        <p class="quote">“Travel expands the mind and fills the gap in the heart.” — Start your next journey with us.</p>
+      </div>
+
+      <div class="hero-right" style="min-width:220px;text-align:right">
+        <img src="https://via.placeholder.com/220x120?text=Fly" alt="airplane illustration" style="border-radius:8px;box-shadow:var(--shadow)" />
+      </div>
+    </section>
+
+    <section style="margin-top:20px">
+      <div class="card">
+        <h2>About this site</h2>
+        <p class="muted">This demo Airline Reservation System is a minimal frontend that connects to the backend API. It demonstrates user authentication, flight search, booking flow, and a simulated payment step. Use the Login and Register buttons above to create an account and start booking.</p>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature">
+            <strong>Search & Filter</strong>
+            <div class="muted">Find flights by origin, destination, date, class and passenger count.</div>
+          </div>
+          <div class="feature">
+            <strong>Secure Booking</strong>
+            <div class="muted">Bookings require authentication; tokens are stored in localStorage for the demo.</div>
+          </div>
+          <div class="feature">
+            <strong>Simulated Payments</strong>
+            <div class="muted">Payments are simulated. Use the checkout to test the flow without real charges.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:16px">
+      <div class="card">
+        <h3>Quick tips</h3>
+        <ul class="muted">
+          <li>Register a new account to enable booking and viewing your bookings.</li>
+          <li>If you run into CORS issues, run the frontend through a static server (Live Server or http-server) rather than opening files via file://</li>
+          <li>API base is configured in js/main.js — update if your backend runs on a different port.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

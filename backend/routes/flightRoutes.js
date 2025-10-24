@@ -1,16 +1,16 @@
-import express from 'express';
-import { addFlight, getAllFlights, searchFlights } from '../controllers/FlightController.js';
-import { protect, adminOnly } from '../middlewares/authMiddleware.js';
+import express from "express";
+import { addFlight, getFlights, searchFlights } from "../controllers/FlightController.js";
+import { protect, adminOnly } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// Admin-only route to add flight
-router.post('/add', protect, adminOnly, addFlight);
+// ✅ Search route FIRST to avoid conflict with :id
+router.get("/search", searchFlights);
 
-// Get all flights
-router.get('/', getAllFlights);
+// ✅ Get all flights
+router.get("/", getFlights);
 
-// Search flights
-router.get('/search', searchFlights);
+// ✅ Add new flight (protected for admin)
+router.post("/", protect, adminOnly, addFlight);
 
 export default router;

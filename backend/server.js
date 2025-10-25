@@ -24,9 +24,20 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => res.send("Airline Reservation System API is running"));
+// --- MOVED STATIC FILES HERE ---
+// Serve static frontend files FIRST
+// This will automatically serve Frontend/index.html for the '/' route
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "../Frontend")));
+// --- END MOVE ---
 
-// Routes
+// Optional: Keep a specific '/' route for API info,
+// but it won't be hit by browsers visiting the root anymore.
+// Or you can remove it entirely.
+app.get("/api-info", (req, res) => res.send("Airline Reservation System API is running"));
+
+// API Routes (defined AFTER static files)
 app.use("/api/users", userRoutes);
 app.use("/api/airlines", airlineRoutes);
 app.use("/api/flights", flightRoutes);
@@ -35,10 +46,14 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/airports", airportRoutes);
 
-// serve static frontend files
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../Frontend")));
+// --- CATCH-ALL FOR FRONTEND ROUTING (Optional but Recommended for SPAs) ---
+// If you were using a frontend framework with routing (like React Router),
+// you would add a catch-all route here to send index.html for any unknown GET request.
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../Frontend', 'index.html'));
+// });
+// --- END CATCH-ALL ---
+
 
 // Global error handlers (log and keep useful info)
 process.on("unhandledRejection", (reason, promise) => {
@@ -62,7 +77,6 @@ const startServer = async () => {
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   } catch (err) {
     console.error("❌ Failed to start server:", err);
-    // keep process alive for debugging; remove next line if you want it to exit on failure
     // process.exit(1);
   }
 };

@@ -1,5 +1,5 @@
-import Payment from "../models/Payment.js";
-import Ticket from "../models/Ticket.js";
+import Payment from "../models/Payment.js"; // <-- CORRECTED PATH
+import Ticket from "../models/Ticket.js"; // <-- CORRECTED PATH
 
 // Create new payment
 export const createPayment = async (req, res) => {
@@ -54,3 +54,4 @@ export const getPaymentByTicket = async (req, res) => {
     res.status(500).json({ message: "Error fetching payment", error: error.message });
   }
 };
+

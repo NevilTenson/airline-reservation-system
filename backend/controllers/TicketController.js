@@ -1,14 +1,12 @@
-// controllers/TicketController.js
-
 import { sequelize } from "../models/index.js";
-import Booking from "../models/booking.js"; // Note: check filename booking.js vs Booking.js
-import Ticket from "../models/Ticket.js";
-import Flight from "../models/Flight.js";
-import Class from "../models/Class.js";
-import User from "../models/User.js";
-import Payment from "../models/Payment.js";
-import Passenger from "../models/Passenger.js"; // <-- Import new model
-import Airport from "../models/Airport.js";
+import Booking from "../models/booking.js"; // <-- CORRECTED
+import Ticket from "../models/Ticket.js"; // <-- CORRECTED
+import Flight from "../models/Flight.js"; // <-- CORRECTED
+import Class from "../models/Class.js"; // <-- CORRECTED
+import User from "../models/User.js"; // <-- CORRECTED
+import Payment from "../models/Payment.js"; // <-- CORRECTED
+import Passenger from "../models/Passenger.js"; // <-- CORRECTED
+import Airport from "../models/Airport.js"; // <-- CORRECTED
 // ----------------------------------------------------------------
 // 🎟 CREATE A NEW BOOKING (UPDATED)
 // ----------------------------------------------------------------
@@ -188,7 +186,10 @@ export const getBookingByPNR = async (req, res) => {
             {
               model: Ticket, // <-- Include Ticket *within* Passenger
               include: [
-                { model: Flight, attributes: ["flightNumber", "origin", "destination"] },
+                { model: Flight, attributes: ["flightNumber", "origin_code", "destination_code"], include: [ // Corrected attributes
+                    { model: Airport, as: 'Origin', attributes: ['city', 'airport_code'] },
+                    { model: Airport, as: 'Destination', attributes: ['city', 'airport_code'] }
+                ] }, 
                 { model: Class, attributes: ["classType", "fare"] },
               ],
             },
@@ -294,3 +295,21 @@ export const ADMIN_getAllTickets = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message }); // Send error message back
   }
 };
+
+// --- NEW FUNCTION: ADMIN DELETE TICKET ---
+export const deleteTicket = async (req, res) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+        if (!ticket) {
+            return res.status(404).json({ message: "Ticket not found" });
+        }
+        // Note: This will cascade and delete from associated tables
+        // based on your model definitions (e.g., Passenger)
+        await ticket.destroy();
+        res.json({ message: "Ticket removed successfully" });
+    } catch (err) {
+        console.error("❌ Error deleting ticket:", err);
+        res.status(500).json({ error: err.message });
+    }
+};
+

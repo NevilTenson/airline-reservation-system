@@ -1,14 +1,13 @@
-// backend/models/index.js
 import sequelize from "../config/db.js";
 
 // --- Import ALL models ---
 import Airline from "./Airline.js";
-import Airport from "./Airport.js"; // New
+import Airport from "./Airport.js";
 import Flight from "./Flight.js";
-import Class from "./Class.js"; // Renamed from ClassModel if you used that
+import Class from "./Class.js";
 import User from "./User.js";
-import Booking from "./booking.js"; // New
-import Passenger from "./Passenger.js"; // New
+import Booking from "./booking.js";
+import Passenger from "./Passenger.js";
 import Ticket from "./Ticket.js";
 import Payment from "./Payment.js";
 
@@ -50,6 +49,25 @@ Ticket.belongsTo(Class, { foreignKey: "class_id" });
 User.hasMany(Booking, { foreignKey: "user_id", onDelete: "CASCADE" }); // If user deleted, delete their bookings
 Booking.belongsTo(User, { foreignKey: "user_id" });
 
+// --- PILOT RELATIONSHIP ---
+// 👨‍✈️ User (Pilot) <-> Flight (1:M, Optional)
+// A User (where role='pilot') can be assigned to many Flights.
+// A Flight belongs to one Pilot (or null if unassigned).
+User.hasMany(Flight, {
+    foreignKey: 'pilotId',
+    constraints: false, // Allows pilotId to be null initially
+    scope: { // Optional: Enforce that the associated User should have role='pilot' (requires application-level checks)
+       // role: 'pilot'
+    },
+    as: 'AssignedFlights' // Alias for when fetching flights for a pilot
+});
+Flight.belongsTo(User, {
+    foreignKey: 'pilotId',
+    as: 'Pilot' // Alias for when fetching the pilot for a flight
+});
+// --- END PILOT RELATIONSHIP ---
+
+
 // --- Relationships involving BOOKING ---
 // 📒 Booking <-> Passenger (1:M)
 Booking.hasMany(Passenger, { foreignKey: "booking_id", onDelete: "CASCADE" }); // If booking deleted, delete passengers
@@ -71,12 +89,13 @@ Ticket.belongsTo(Passenger, { foreignKey: "passenger_id" });
 export {
   sequelize,
   Airline,
-  Airport, // Added
+  Airport,
   Flight,
   Class,
   User,
-  Booking, // Added
-  Passenger, // Added
+  Booking,
+  Passenger,
   Ticket,
   Payment,
 };
+

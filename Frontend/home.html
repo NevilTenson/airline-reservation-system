@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My Airline — Home</title>
-  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="/styles/main.css" /> <!-- Corrected path -->
   <style>
     /* small home-page specific styles */
     .hero{
@@ -31,16 +31,28 @@
   </style>
 </head>
 <body>
+  <!-- === UPDATED NAVIGATION BAR === -->
   <nav>
     <ul>
-      <li><a href="home.html">My Airline</a></li>
-      <li id="nav-search"><a href="search.html">Search Flights</a></li>
-      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
-      <li id="nav-login"><a href="login.html">Login</a></li>
-      <li id="nav-register"><a href="register.html">Register</a></li>
+      <li><a href="/home.html">My Airline</a></li> <!-- Use root path -->
+      <li id="nav-search"><a href="/search.html">Search Flights</a></li> <!-- Use root path -->
+      <li id="nav-bookings" class="hidden"><a href="/bookings.html">My Bookings</a></li> <!-- Use root path -->
+      <li id="nav-admin" class="hidden"><a href="/admin.html">Admin</a></li> <!-- Added Admin -->
+      <li id="nav-login" class="hidden"><a href="/login.html">Login</a></li> <!-- Added hidden -->
+      <li id="nav-register" class="hidden"><a href="/register.html">Register</a></li> <!-- Added hidden -->
       <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+      <!-- --- ADDED PROFILE AVATAR --- -->
+      <li id="nav-profile" class="hidden profile-avatar-li" style="margin-left: auto;">
+        <a href="/profile.html" title="View Profile" class="profile-avatar-link"> <!-- Use root path -->
+          <div class="profile-avatar-icon">
+            <span id="nav-profile-initial" class="profile-avatar-initial">?</span>
+          </div>
+        </a>
+      </li>
+      <!-- --- END PROFILE AVATAR --- -->
     </ul>
   </nav>
+  <!-- === END UPDATED NAVIGATION BAR === -->
 
   <main class="container">
     <section class="hero card">
@@ -49,15 +61,16 @@
         <p class="lead">Fast, simple, and reliable flight booking. Search flights, choose seats, and complete payments — all in one place.</p>
 
         <div class="cta-group">
-          <a class="btn primary" href="index.html">Search Flights</a>
-          <a class="btn link" href="bookings.html">My Bookings</a>
+          <a class="btn primary" href="/search.html">Search Flights</a> <!-- Use root path -->
+          <a class="btn link" href="/bookings.html" id="hero-my-bookings-btn">My Bookings</a> <!-- Use root path -->
         </div>
 
         <p class="quote">“Travel expands the mind and fills the gap in the heart.” — Start your next journey with us.</p>
       </div>
 
       <div class="hero-right" style="min-width:220px;text-align:right">
-        <img src="https://via.placeholder.com/220x120?text=Fly" alt="airplane illustration" style="border-radius:8px;box-shadow:var(--shadow)" />
+         <!-- Updated placeholder -->
+        <img src="https://placehold.co/220x120/0d6efd/ffffff?text=Fly+With+Us" alt="airplane flying over clouds" style="border-radius:8px;box-shadow:var(--shadow)" />
       </div>
     </section>
 
@@ -76,8 +89,8 @@
             <div class="muted">Bookings require authentication; tokens are stored in localStorage for the demo.</div>
           </div>
           <div class="feature">
-            <strong>Simulated Payments</strong>
-            <div class="muted">Payments are simulated. Use the checkout to test the flow without real charges.</div>
+            <strong>Easy Management</strong>
+            <div class="muted">View your bookings and manage your profile details easily.</div>
           </div>
         </div>
       </div>
@@ -88,13 +101,24 @@
         <h3>Quick tips</h3>
         <ul class="muted">
           <li>Register a new account to enable booking and viewing your bookings.</li>
-          <li>If you run into CORS issues, run the frontend through a static server (Live Server or http-server) rather than opening files via file://</li>
+          <li>Ensure your backend server is running on the configured API base (usually http://localhost:5000).</li>
           <li>API base is configured in js/main.js — update if your backend runs on a different port.</li>
         </ul>
       </div>
     </section>
   </main>
 
-  <script type="module" src="js/main.js"></script>
+   <!-- Corrected script path -->
+  <script type="module" src="./js/main.js"></script>
+  <script type="module">
+      // Corrected import path
+      import { isLoggedIn } from './js/main.js';
+      // Hide hero My Bookings button if not logged in
+      const heroBookingsBtn = document.getElementById('hero-my-bookings-btn');
+      if (heroBookingsBtn && !isLoggedIn()) {
+          heroBookingsBtn.classList.add('hidden');
+      }
+  </script>
 </body>
 </html>
+

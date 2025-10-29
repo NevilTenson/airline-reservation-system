@@ -1,4 +1,4 @@
-import Airline from '../models/Airline.js';
+import Airline from '../models/Airline.js'; // <-- CORRECTED PATH
 
 // Add new airline
 export const addAirline = async (req, res) => {
@@ -18,6 +18,18 @@ export const addAirline = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
+export const deleteAirline = async (req, res) => {
+  try {
+    const airline = await Airline.findByPk(req.params.id);
+    if (!airline) {
+      return res.status(404).json({ message: "Airline not found" });
+    }
+    await airline.destroy();
+    res.json({ message: "Airline removed successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 // Get all airlines
 export const getAirlines = async (req, res) => {
@@ -29,3 +41,4 @@ export const getAirlines = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
+

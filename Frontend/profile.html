@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Profile</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <!-- Add specific styles if needed -->
+  <style>
+    .profile-card {
+        max-width: 500px;
+        margin: 20px auto; /* Center the card */
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="home.html">My Airline</a></li>
+      <li id="nav-search"><a href="search.html">Search Flights</a></li>
+      <li id="nav-bookings" class="hidden"><a href="bookings.html">My Bookings</a></li>
+      <li id="nav-admin" class="hidden"><a href="admin.html">Admin</a></li>
+      <li id="nav-login" class="hidden"><a href="login.html">Login</a></li>
+      <li id="nav-register" class="hidden"><a href="register.html">Register</a></li>
+      <li id="nav-logout" class="hidden"><button id="logout-btn">Logout</button></li>
+      <!-- Profile Avatar Link (Will be populated by main.js) -->
+      <li id="nav-profile" class="hidden profile-avatar-li" style="margin-left: auto;">
+        <a href="profile.html" title="View Profile" class="profile-avatar-link">
+          <div class="profile-avatar-icon">
+            <span id="nav-profile-initial" class="profile-avatar-initial">?</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <header><h1>My Profile</h1></header>
+
+    <!-- Use a class for easier centering/styling -->
+    <section class="card profile-card">
+      <div id="profile-message" class="message-box hidden"></div>
+
+      <form id="profile-form" class="form-stack">
+        <div class="form-group">
+          <label for="profile-name">Name</label>
+          <input id="profile-name" name="name" type="text" required />
+        </div>
+
+        <div class="form-group">
+          <label for="profile-email">Email</label>
+          <input id="profile-email" name="email" type="email" required />
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;" />
+
+        <p class="small-note">Only fill password fields if you want to change your password.</p>
+
+        <div class="form-group">
+          <label for="profile-password">New Password</label>
+          <input id="profile-password" name="password" type="password" placeholder="Min. 6 characters" />
+        </div>
+
+        <div class="form-group">
+          <label for="profile-confirm-password">Confirm New Password</label>
+          <input id="profile-confirm-password" name="confirmPassword" type="password" />
+        </div>
+
+        <button type="submit" class="btn primary" style="width: 100%;">Update Profile</button>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>

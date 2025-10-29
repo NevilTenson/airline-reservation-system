@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pilot Dashboard</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    /* Add styles similar to bookings.html or admin.html if needed */
+    .flight-list-item {
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+    }
+    .flight-list-item:last-child {
+        border-bottom: none;
+    }
+    .flight-details span {
+        display: inline-block;
+        margin-right: 15px;
+        min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="home.html">My Airline</a></li>
+      <!-- Basic Nav for Pilot - Adjust links as needed -->
+      <li id="nav-pilot-dashboard"><a href="pilot-dashboard.html" class="active">My Flights</a></li>
+      <li id="nav-logout"><button id="logout-btn">Logout</button></li>
+      <!-- Profile Avatar Link (Will be populated by main.js) -->
+      <li id="nav-profile" class="hidden profile-avatar-li" style="margin-left: auto;">
+        <a href="profile.html" title="View Profile" class="profile-avatar-link">
+          <div class="profile-avatar-icon">
+            <span id="nav-profile-initial" class="profile-avatar-initial">?</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <header><h1>My Assigned Flights</h1></header>
+
+    <section class="card">
+      <div id="pilot-flights-message">Loading assigned flights...</div>
+      <div id="pilot-flights-list">
+        <!-- Assigned flights will be listed here -->
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script> <!--* Ensure correct path -->
+  <script type="module" src="js/pilot.js"></script> <!--* Ensure correct path -->
+</body>
+</html>

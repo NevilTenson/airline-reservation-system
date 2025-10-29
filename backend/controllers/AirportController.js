@@ -1,5 +1,4 @@
-// controllers/AirportController.js
-import Airport from "../models/Airport.js";
+import Airport from "../models/Airport.js"; // <-- CORRECTED
 
 // ✈️ Add a new Airport (Admin only)
 export const addAirport = async (req, res) => {
@@ -28,6 +27,18 @@ export const addAirport = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+export const deleteAirport = async (req, res) => {
+  try {
+    const airport = await Airport.findByPk(req.params.airport_code);
+    if (!airport) {
+        return res.status(404).json({ message: "Airport not found" });
+    }
+    await airport.destroy();
+    res.json({ message: "Airport removed successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 // ✈️ Get all Airports
 export const getAirports = async (req, res) => {
@@ -41,3 +52,4 @@ export const getAirports = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+

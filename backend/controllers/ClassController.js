@@ -1,5 +1,4 @@
-// controllers/ClassController.js
-import ClassModel from "../models/Class.js";
+import Class from "../models/Class.js";
 import Flight from "../models/Flight.js";
 import Airport from "../models/Airport.js"; // Import Airport
 
@@ -19,7 +18,7 @@ export const addClass = async (req, res) => {
     }
     // Basic validation for seats
     if (Number(total_seats) <= 0) {
-        return res.status(400).json({ message: "Total seats must be positive." });
+      return res.status(400).json({ message: "Total seats must be positive." });
     }
 
     const flight = await Flight.findByPk(flightId);
@@ -29,12 +28,12 @@ export const addClass = async (req, res) => {
     }
 
     // Optional: Check if class type already exists for this flight
-    const existingClass = await ClassModel.findOne({ where: { flight_id: flightId, classType: classType } });
+    const existingClass = await Class.findOne({ where: { flight_id: flightId, classType: classType } });
     if (existingClass) {
-        return res.status(400).json({ message: `${classType} class already exists for this flight.` });
+      return res.status(400).json({ message: `${classType} class already exists for this flight.` });
     }
 
-    const newClass = await ClassModel.create({
+    const newClass = await Class.create({
       classType,
       fare,
       total_seats,
@@ -58,7 +57,7 @@ export const getClasses = async (req, res) => {
   try {
     console.log("🔹 Fetching classes with Flight and Airport info");
 
-    const classes = await ClassModel.findAll({
+    const classes = await Class.findAll({
       include: [
         {
           model: Flight,
@@ -83,3 +82,16 @@ export const getClasses = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+export const deleteClass = async (req, res) => {
+  try {
+    const classRow = await Class.findByPk(req.params.id);
+    if (!classRow) {
+        return res.status(404).json({ message: "Class not found" });
+    }
+    await classRow.destroy();
+    res.json({ message: "Class removed successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+

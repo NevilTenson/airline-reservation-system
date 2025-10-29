@@ -15,6 +15,7 @@ import ticketRoutes from "./routes/ticketRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import classRoutes from "./routes/classRoutes.js";
 import airportRoutes from "./routes/airportRoutes.js";
+import reportRoutes from "./routes/reportRoutes.js";
 
 dotenv.config();
 
@@ -24,17 +25,22 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-// --- MOVED STATIC FILES HERE ---
-// Serve static frontend files FIRST
-// This will automatically serve Frontend/index.html for the '/' route
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../Frontend")));
-// --- END MOVE ---
 
-// Optional: Keep a specific '/' route for API info,
-// but it won't be hit by browsers visiting the root anymore.
-// Or you can remove it entirely.
+// --- CORRECTED PATHS ---
+// Specific route for the homepage
+app.get("/", (req, res) => {
+  // Use 'Frontend' (capital F, no dot)
+  res.sendFile(path.join(__dirname, "../Frontend/home.html"));
+});
+
+// Serve static files from the 'Frontend' directory
+// Use 'Frontend' (capital F, no dot)
+app.use(express.static(path.join(__dirname, "../Frontend")));
+// --- END CORRECTED PATHS ---
+
+
 app.get("/api-info", (req, res) => res.send("Airline Reservation System API is running"));
 
 // API Routes (defined AFTER static files)
@@ -45,26 +51,17 @@ app.use("/api/tickets", ticketRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/airports", airportRoutes);
+app.use("/api/reports", reportRoutes);
 
-// --- CATCH-ALL FOR FRONTEND ROUTING (Optional but Recommended for SPAs) ---
-// If you were using a frontend framework with routing (like React Router),
-// you would add a catch-all route here to send index.html for any unknown GET request.
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../Frontend', 'index.html'));
-// });
-// --- END CATCH-ALL ---
-
-
-// Global error handlers (log and keep useful info)
+// Global error handlers
 process.on("unhandledRejection", (reason, promise) => {
   console.error("💥 Unhandled Rejection at:", promise, "reason:", reason);
 });
 process.on("uncaughtException", (err) => {
   console.error("💥 Uncaught Exception:", err);
-  // Optional: process.exit(1);
 });
 
-// Start sequence: test DB and sync before listening
+// Start sequence
 const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
@@ -77,7 +74,6 @@ const startServer = async () => {
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   } catch (err) {
     console.error("❌ Failed to start server:", err);
-    // process.exit(1);
   }
 };
 

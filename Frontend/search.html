@@ -24,19 +24,28 @@
     <section class="card">
       <form id="search-form" class="form-grid" autocomplete="off">
         <label>
-          Origin
-          <input id="origin" name="origin" required />
-        </label>
+        Origin
+        <!-- Changed from input to select -->
+        <select id="origin-select" name="origin_code" required>
+          <option value="">Loading airports...</option>
+        </select>
+      </label>
+
+      <label>
+        Destination
+        <!-- Changed from input to select -->
+        <select id="destination-select" name="destination_code" required>
+          <option value="">Loading airports...</option>
+        </select>
+      </label>
 
         <label>
-          Destination
-          <input id="destination" name="destination" required />
-        </label>
-
-        <label>
-          Departure Date
-          <input id="departureDate" name="departureDate" type="date" required />
-        </label>
+        Departure Date
+        <!-- Changed to a select dropdown -->
+        <select id="departureDate-select" name="departureDate" required disabled>
+          <option value="">Select Origin & Destination first</option>
+        </select>
+      </label>
 
         <label>
           Passengers

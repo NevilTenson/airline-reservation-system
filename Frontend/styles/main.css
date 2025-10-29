@@ -251,3 +251,78 @@ input[type="datetime-local"]:invalid,
 input[type="datetime-local"]::placeholder { /* Fallback for some browsers */
     color: #6c757d; /* Use muted color for placeholder */
 }
+/* ---------- Styles for Admin Reports Section ---------- */
+
+/* Style for the user details card */
+.report-user-card {
+  margin-bottom: var(--gap, 16px);
+  background-color: #f8fbff; /* Light blue background */
+  border-left: 4px solid var(--primary, #0b5ed7); /* Blue accent border */
+}
+
+.report-user-card h3 {
+  margin-bottom: 10px;
+  color: var(--primary, #0b5ed7);
+}
+
+.report-user-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+#reports-result h3 {
+  margin-top: 20px; /* Add space above the ticket/flight list headings */
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
+  border-bottom: 1px solid #eef3f8;
+  padding-bottom: 5px;
+}
+
+/* Re-use ticket card styles for consistency */
+#reports-result .ticket-card {
+  margin-top: var(--gap, 16px); /* Add space between ticket cards */
+}
+
+/* Style for Assigned Flights list items (if pilot role is used) */
+#reports-result .list-item-card {
+  margin-top: 8px;
+  background-color: #fff; /* White background for flights */
+  border: 1px solid #eef3f8;
+  border-radius: 8px; /* Slightly rounded corners */
+}
+
+#reports-result .list-item-card strong {
+  color: var(--primary, #0b5ed7);
+}
+
+/* Style for the message boxes */
+.message-box {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: var(--gap, 16px);
+  border: 1px solid transparent;
+  display: block; /* Make sure it shows */
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+.message-box.hidden {
+  display: none; /* Hide when class is added */
+  opacity: 0;
+}
+.message-box.success {
+  background-color: #e6fffa;
+  border-color: #b3f5e9;
+  color: #237b6a;
+}
+.message-box.error {
+  background-color: #fff6f6;
+  border-color: #ffe6e6;
+  color: var(--danger, #dc3545);
+}
+.message-box.info { /* For 'Loading...' messages */
+    background-color: #ebf8ff;
+    border-color: #bee3f8;
+    color: #2b6cb0;
+}
